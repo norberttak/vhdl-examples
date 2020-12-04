@@ -31,40 +31,24 @@
 --  Altera expressly does not recommend, suggest or require that this reference design 
 --  file be used in combination with any other product not provided by Altera.
 -----------------------------------------------------------------------------------------
-
-
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity clk_gen is
-generic(pciclk_66Mhz_enable : boolean := false);
-    port(pciclk : out std_logic);
+entity clock_gen is
+    port(clock : out std_logic);
+end clock_gen;
 
-end clk_gen;
-
-architecture behavior of clk_gen is
-
+architecture behaviour of clock_gen is
     signal clk : std_logic;
-    
 begin
-  
---**************************  
     clk_process: process
---**************************    
     begin
-        if pciclk_66Mhz_enable = true then
-            clk <= '1';
-            wait for 7 ns;
-            clk <= '0';
-            wait for 8 ns;
-        else
-            clk <= '1';
-            wait for 15 ns;
-            clk <= '0';
-            wait for 15 ns;
-        end if; 
+        clk <= '1';
+        wait for 3 ns;
+        clk <= '0';
+        wait for 3 ns;
     end process clk_process;
 
-     pciclk <= clk;
+    clock <= clk;
 
-end behavior;
+end behaviour;

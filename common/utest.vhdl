@@ -21,7 +21,7 @@ use std.textio.all;
 
 package utest is
 
-    file data_file_handler : text open write_mode is "testreport.html";        
+    file data_file_handler : text;
 
     procedure CREATE_TEST_REPORT ( title: in string ; filename: in string);
     procedure TEST               ( testcase: in string );
@@ -45,6 +45,7 @@ package body utest is
     procedure CREATE_TEST_REPORT (title: in string; filename: in string) is
         variable lineout: line;
     begin
+        file_open(data_file_handler, filename, write_mode);
         write(lineout, string'("<html>"));
         write(lineout, string'("<title>"));
         write(lineout, title);
@@ -63,6 +64,7 @@ package body utest is
         write(lineout, now);
         write(lineout, string'("</body></html>"));
         writeline(data_file_handler,lineout);
+        file_close(data_file_handler);
     end CLOSE_TEST_REPORT;
 
     procedure TEST(testcase: in string ) is
