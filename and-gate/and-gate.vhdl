@@ -23,7 +23,5 @@ end and_gate;
 
 architecture behaviour of and_gate is
 begin
-    
-    -- Your implementation shall be here
-
+   q <= a and b;
 end behaviour;

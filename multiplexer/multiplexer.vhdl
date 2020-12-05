@@ -25,8 +25,12 @@ end multiplexer;
 
 architecture behaviour of multiplexer is
 begin
-
-    q <= 'Z';
-    -- Your implementation shall be here
-
+    q <= data(0) when addr = "000" else
+         data(1) when addr = "001" else
+         data(2) when addr = "010" else
+         data(3) when addr = "011" else
+         data(4) when addr = "100" else
+         data(5) when addr = "101" else
+         data(6) when addr = "110" else
+         data(7) when addr = "111";
 end behaviour;

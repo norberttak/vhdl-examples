@@ -28,9 +28,6 @@ entity full_add is
     );
 end full_add;
 
-architecture behaviour of full_add is
-begin
-
 -- full add :
 -- a    b    cIn  cOut  sum
 -- 0    0    0    0     0
@@ -41,8 +38,31 @@ begin
 -- 1    0    1    1     0
 -- 1    1    0    1     0
 -- 1    1    1    1     1
-    sum <= 'Z';
-    cOut <= 'Z';
-    -- Your implementation shall be here
 
+--full add 1st version (asyncron):
+--architecture behaviour of full_add is
+--begin
+--    sum <= (a xor b) xor cIn;
+--    cOut <= (a and b) or (b and cIn) or (cIn and a);
+--end behaviour;
+
+
+--full add 2nd version(syncron):
+architecture behaviour of full_add is
+    signal s_sum : std_logic;
+    signal s_cOut : std_logic;
+begin
+    process(clk, n_reset)
+    begin
+        if (n_reset = '0') then
+            s_sum <= '0';
+            s_cout <= '0';
+        elsif (clk'event and clk='1') then 
+            s_sum <= (a xor b) xor cIn;
+            s_cOut <= (a and b) or (b and cIn) or (cIn and a);
+        end if;
+    end process;
+
+    sum <= s_sum when n_reset = '1' else '0';
+    cOut <= s_cOut when n_reset = '1' else '0';
 end behaviour;
