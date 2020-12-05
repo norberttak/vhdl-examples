@@ -44,9 +44,9 @@ begin
     clk_process: process
     begin
         clk <= '1';
-        wait for 3 ns;
+        wait for 15.625 ns; -- 32 MHz clock
         clk <= '0';
-        wait for 3 ns;
+        wait for 15.625 ns;
     end process clk_process;
 
     clock <= clk;
